@@ -39,6 +39,8 @@ function! g:SyntasticHighlightingNotifier.refresh(loclist) " {{{2
         for item in issues
             let group = 'Syntastic' . get(item, 'subtype', '') . ( item['type'] ==? 'E' ? 'Error' : 'Warning' )
 
+            call matchaddpos(group . 'Line', [item['lnum']])
+
             " The function `Syntastic_{filetype}_{checker}_GetHighlightRegex` is
             " used to override default highlighting.
             if has_key(item, 'hl')
